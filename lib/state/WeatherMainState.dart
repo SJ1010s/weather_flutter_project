@@ -11,8 +11,6 @@ var weatherDataRequest = WeatherDataRequest();
 class WeatherMainState with ChangeNotifier {
 
 
-  Future<WeatherData> weatherData = weatherDataRequest.getResponseData();
-
   late String _cityName = "Город";
   String get cityName => _cityName;
 
@@ -31,8 +29,9 @@ class WeatherMainState with ChangeNotifier {
   late String _humidity = "";
 
   String get humidity => _humidity;
-  
+
   initWeatherState(){
+    Future<WeatherData> weatherData = weatherDataRequest.getResponseData();
     weatherData.then((value){
       _cityName = value.name.toString();
       log(_cityName);
